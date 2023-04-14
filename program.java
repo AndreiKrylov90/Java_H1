@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class program {
     public static void main(String[] args) {
-        ex3();
+        ex4();
     }
 
     static int ex0() {
@@ -76,44 +76,49 @@ public class program {
                 result = a / b;
                 break;
         }
-        
+
         System.out.println(a + op + b + " = " + result);
         return result;
     }
 
-    static double ex4() {
-        // Задано уравнение вида q + w = e, q, w, e >= 0. Некоторые цифры могут быть заменены знаком вопроса, например, 2? + ?5 = 69. 
-        // Требуется восстановить выражение до верного равенства. Предложить хотя бы одно решение или сообщить, что его нет.
-        System.out.println("Введите первое число?");
+    static void ex4() {
+        // Задано уравнение вида q + w = e, q, w, e >= 0. Некоторые цифры могут быть
+        // заменены знаком вопроса, например, 2? + ?5 = 69.
+        // Требуется восстановить выражение до верного равенства. Предложить хотя бы
+        // одно решение или сообщить, что его нет.
+        System.out.println("Будем работать с положительными двузначными числами в уравнении такого вида: q + w = e ");
+        System.out.println("Введите первое число, заменив вторую цифру на знак ?");
         Scanner scanner = new Scanner(System.in);
-        double a = scanner.nextDouble();
+        String number1 = scanner.nextLine();
 
-        System.out.println("Введите что будем делать (складывать/вычитать/перемножать/делить? ");
-        Scanner scanner1 = new Scanner(System.in);
-        String op = scanner1.nextLine();
+        System.out.println("Введите второе число, заменив первую цифру на знак ?");
+        String number2 = scanner.nextLine();
 
-        System.out.println("Введите второе число?");
-        double b = scanner.nextDouble();
+        System.out.println("Введите желаемую сумму этих чисел ?");
+        String number3 = scanner.nextLine();
 
-        double result = 0;
+        String[] temp1 = number1.split("(?!^)");
+        String[] temp2 = number2.split("(?!^)");
 
-        switch (op) {
-            case "+":
-                result = a + b;
-                break;
-            case "-":
-                result = a - b;
-                break;
-            case "*":
-                result = a * b;
-                break;
-            case "/":
-                result = a / b;
-                break;
+        int q = Integer.parseInt(temp1[0]);
+        int w = Integer.parseInt(temp2[1]);
+        int summa = Integer.parseInt(number3);
+
+        int count = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if ((q * 10 + i + j * 10 + w) == summa) {
+                    int a = q * 10 + i;
+                    int b = j * 10 + w;
+                    System.out.println(a + " + " + b + " = " + summa);
+                    count += 1;
+                }
+            }
         }
-        
-        System.out.println(a + op + b + " = " + result);
-        return result;
+
+        if (count == 0) {
+            System.out.println("Решений нет");
+        }
     }
 
 }
